@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberChat - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body" onload="initAdminDashboard()">
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>🛡 Admin Command Center</h1>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <button onclick="openPasswordModal()" class="action-btn" style="background: var(--accent); color: white; padding: 6px 12px;">Change Password</button>
+                <button onclick="adminLogout()" class="logout-sm-btn">Admin Logout</button>
+            </div>
+        </header>
+
+        <!-- Force Password Change Modal/Banner if default credentials active -->
+        <div id="password-change-card" class="card warning-card" style="display:none; margin-bottom: 24px;">
+            <h3>🔒 Security Update Required</h3>
+            <p>You are using the default admin credentials (<code>admin123</code>). Please choose a new secure administrator password before proceeding.</p>
+            <div class="input-group" style="margin-top: 12px;">
+                <input type="password" id="new-admin-banner-password" placeholder="Enter new admin password...">
+                <button onclick="updateAdminBannerPassword()" class="primary-btn" style="margin-top: 8px;">Update Password</button>
+            </div>
+        </div>
+
+        <div class="admin-grid">
+            <!-- User Control Panel -->
+            <div class="card">
+                <h2>User Management</h2>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-users-tbody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Group Chat Control Panel -->
+            <div class="card">
+                <h2>Group Chat Moderation</h2>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Group Name</th>
+                                <th>Creator</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-groups-tbody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add User Panel (Admin Only) -->
+            <div class="card" style="grid-column: span 2;">
+                <h2>Create New User</h2>
+                <form onsubmit="adminCreateUser(event)" style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px; align-items: flex-end;">
+                    <div class="input-group" style="margin: 0;">
+                        <label>Username</label>
+                        <input type="text" id="new-user-username" required placeholder="Enter username...">
+                    </div>
+                    <div class="input-group" style="margin: 0;">
+                        <label>Password</label>
+                        <input type="password" id="new-user-password" required placeholder="Enter password...">
+                    </div>
+                    <div class="input-group" style="margin: 0;">
+                        <label>Role</label>
+                        <select id="new-user-role" style="width: 100%; padding: 10px 14px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 6px; color: var(--text-main); outline: none;">
+                            <option value="user">Standard User</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="primary-btn" style="height: 41px;">Create User</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal for Admin Portal -->
+    <div id="password-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Change Password</h3>
+            <div class="input-group">
+                <label>Current Password</label>
+                <input type="password" id="current-password" placeholder="••••••••">
+            </div>
+            <div class="input-group">
+                <label>New Password</label>
+                <input type="password" id="new-password" placeholder="••••••••">
+            </div>
+            <div class="modal-actions">
+                <button onclick="changePassword()" class="primary-btn">Update</button>
+                <button onclick="closePasswordModal()" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

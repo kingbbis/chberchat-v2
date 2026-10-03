@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberChat - Sign In</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+    <div class="auth-card">
+        <div class="brand-header">
+            <h2>⚡ CyberChat</h2>
+            <p>Secure Local Communication Platform</p>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('login')">User Login</button>
+            <button class="tab-btn admin-tab-btn" onclick="switchTab('admin')">Admin Portal</button>
+        </div>
+
+        <!-- User Login Form -->
+        <form id="login-form" class="form-section active" onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="login-username" required placeholder="Enter your username...">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="login-password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="primary-btn">Sign In to Chat</button>
+        </form>
+
+        <!-- Admin Login Form -->
+        <form id="admin-form" class="form-section" onsubmit="handleAdminLogin(event)">
+            <div class="input-group">
+                <label>Admin Username</label>
+                <input type="text" id="admin-username" required placeholder="admin123">
+            </div>
+            <div class="input-group">
+                <label>Admin Password</label>
+                <input type="password" id="admin-password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="primary-btn admin-btn">Admin Command Login</button>
+        </form>
+
+        <p id="error-msg" class="error-text"></p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

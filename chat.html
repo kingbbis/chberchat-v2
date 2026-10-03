@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberChat - Rooms</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="chat-body" onload="initChatApp()">
+    <div id="muted-banner" class="muted-warning-banner" style="display:none;">
+        ⚠️ Your account has been muted by an administrator. You can read messages, but your sending privileges are suspended.
+    </div>
+
+    <div class="chat-layout">
+        <!-- Sidebar: Rooms & Online Users -->
+        <div class="sidebar">
+            <div class="user-profile-card">
+                <div>
+                    <span id="current-user-badge">User</span>
+                    <button onclick="openPasswordModal()" style="display:block; font-size: 0.75rem; color: var(--accent); margin-top: 4px; background: none; border: none; cursor: pointer;">Change Password</button>
+                </div>
+                <button onclick="logout()" class="logout-sm-btn">Sign Out</button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h3>Group Chats</h3>
+                    <button onclick="openCreateGroupModal()" class="icon-btn">+</button>
+                </div>
+                <ul id="groups-list" class="nav-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Online Users</h3>
+                <ul id="users-list" class="nav-list plain-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Chat Panel -->
+        <div class="chat-main">
+            <div class="chat-header">
+                <h2 id="active-room-title"># General Lobby</h2>
+                <div id="room-actions-container">
+                    <!-- Dynamic delete group button if creator or admin -->
+                </div>
+            </div>
+
+            <div id="chat-messages" class="chat-messages-container">
+                <!-- Messages populate here -->
+            </div>
+
+            <form id="chat-form" onsubmit="sendMessage(event)" class="chat-input-area">
+                <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+                <button type="submit" id="send-btn" class="primary-btn">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div id="group-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Create New Group Chat</h3>
+            <input type="text" id="new-group-name" placeholder="Group Name...">
+            <div class="modal-actions">
+                <button onclick="createGroup()" class="primary-btn">Create</button>
+                <button onclick="closeCreateGroupModal()" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="password-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Change Password</h3>
+            <div class="input-group">
+                <label>Current Password</label>
+                <input type="password" id="current-password" placeholder="••••••••">
+            </div>
+            <div class="input-group">
+                <label>New Password</label>
+                <input type="password" id="new-password" placeholder="••••••••">
+            </div>
+            <div class="modal-actions">
+                <button onclick="changePassword()" class="primary-btn">Update</button>
+                <button onclick="closePasswordModal()" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
